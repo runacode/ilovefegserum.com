@@ -1,17 +1,16 @@
 <?php
-include_once(dirname(__FILE__) . '/locale/languages.php');
+include_once(dirname(__FILE__) . '/includes/data.php');
 //This code must be included at the top of your script before any output is sent to the browser
 //-even before <!DOCTYPE> declaration
-require_once realpath(dirname(__FILE__)."/resources/konnektiveSDK.php");
+require_once realpath(dirname(__FILE__) . "/resources/konnektiveSDK.php");
 $pageType = "upsellPage3"; //choose from: presalePage, leadPage, checkoutPage, upsellPage1, upsellPage2, upsellPage3, upsellPage4, thankyouPage
 $deviceType = "ALL"; //choose from: DESKTOP, MOBILE, ALL
-$ksdk = new KonnektiveSDK($pageType,$deviceType);
+$ksdk = new KonnektiveSDK($pageType, $deviceType);
 $productId = $ksdk->page->productId;
-$upsell = $ksdk->getProduct((int) $productId);
+$upsell = $ksdk->getProduct((int)$productId);
 
-
+$orderItem=GetOrderItem($ksdk,$data->upsell2ID);
 ?>
-<?php include 'includes/data.php' ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,16 +54,19 @@ $upsell = $ksdk->getProduct((int) $productId);
         </div>
         <div class="upsell-present">
             <div class="d-flex">
-                <div><img src="resources/images/present2.jpg" /></div>
+                <div><img src="resources/images/present2.jpg"/></div>
                 <div><?= T('WOW'); ?></div>
-                <div><img class="img-hor" src="resources/images/present2.jpg" /></div>
+                <div><img class="img-hor" src="resources/images/present2.jpg"/></div>
             </div>
             <div><?= T('You have'); ?> <em><?= T('WON'); ?></em> <?= T('a'); ?> <em><?= T('FREE'); ?></em><br>
-           <?= T('SILICONE MAKE-UP SPONGE!'); ?></div>
+                <?= T('SILICONE MAKE-UP SPONGE!'); ?></div>
         </div>
         <div class="below-upsell-present">
-            <div class="d-flex line-1"><div><?= T('😱'); ?></div><?= T('SOFT TO SKIN - SILICON'); ?> <br> <?= T('MAKE-UP SPONGE'); ?><div><?= T('😱'); ?></div></div>
-            <div class="line-2"><?=T('NO MESS, IT DOESN\'T HURT <br> YOUR SKIN, EASIER TO USE, <b>ANTIALLERGIC AND ANTIBACTERIAL');?></b></div>
+            <div class="d-flex line-1">
+                <div>😱</div><?= T('SOFT TO SKIN - SILICON'); ?> <br> <?= T('MAKE-UP SPONGE'); ?>
+                <div>😱</div>
+            </div>
+            <div class="line-2"><?= T('NO MESS, IT DOESN\'T HURT <br> YOUR SKIN, EASIER TO USE, <b>ANTIALLERGIC AND ANTIBACTERIAL'); ?></b></div>
         </div>
     </div>
 </header>
@@ -94,7 +96,9 @@ $upsell = $ksdk->getProduct((int) $productId);
                         <?php $ksdk->echoUpsaleCheckoutButton('Claim Now'); ?>
 
                     </form>
-                    <div class="below-upsell-button"><?= T('ONLY PAY'); ?> <?php echo $data->currency . $upsell->price ?> SHIPPING & HANDLING</div>
+                    <div class="below-upsell-button"><?= T('ONLY PAY'); ?> <?php echo $data->currency . $upsell->price ?>
+                        SHIPPING & HANDLING
+                    </div>
                 </div>
             </div>
             <div class="row no-thanks">
@@ -106,25 +110,24 @@ $upsell = $ksdk->getProduct((int) $productId);
 
         </div>
     </div>
-    <script>
-        $(document).ready(function(){
-            $('#kformSubmit').click(UpSell);
-            $('#kform_payPalButton').click(UpSell);
-        })
-        function UpSell(){
-            if(window.fbq) {
-                window.fbq('track', 'Purchase', {value: <?php echo $upsell->price ?>, currency: <?= $data->FaceBookCurrency; ?>});
-            }
-        }
 
-    </script>
     <?php
 
+    if ($orderItem) {
 
-    include_once('pixelcode/pixelhelper.php');
+        $pageEvent = "Purchase";
+        $Value = array("value" => $orderItem->price, 'currency' => $data->FaceBookCurrency);
+        $qs = ["Event" => $pageEvent, "Value" => $Value];
+        include_once('pixelcode/pixelhelper.php');
 
+    } else {
+        $PixelPage = "/upsell.html";
+
+        include_once('pixelcode/pixelhelper.php');
+    }
 
     ?>
+
 </body>
 </html>
 

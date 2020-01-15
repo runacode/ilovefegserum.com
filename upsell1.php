@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__) . '/locale/languages.php');
+
 //This code must be included at the top of your script before any output is sent to the browser
 //-even before <!DOCTYPE> declaration
 include_once(dirname(__FILE__) .'/includes/data.php');
@@ -15,7 +15,7 @@ $orderTotal = $ksdk->getOrderTotal();
 <html>
 <head>
     <title>
-        <?= T('Get 2 sets of FEG - EYE BROWN'); ?>
+        <?= T('Get 2 sets of FEG - EYEBROW'); ?>
     </title>
     <meta name="viewport" content="width=device-width"/>
     <meta charset="utf-8"/>
@@ -84,7 +84,7 @@ $orderTotal = $ksdk->getOrderTotal();
         </div>
         <div class="upsell-offer-text">
             <div><b><?= T('Don\'t miss this limited time opportunity'); ?></b></div>
-            <div><span><?= T('😱 RESULTS IN 7 DAYS! 😱'); ?></span>
+            <div><span><?= T('RESULTS IN 7 DAYS!'); ?></span>
                 <P><?= T('FEG Eyebrow Enhancer is for increasing the growth including length, thickness and darkness of eyebrows'); ?></P>
             </div>
         </div>
@@ -143,19 +143,6 @@ $orderTotal = $ksdk->getOrderTotal();
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $('#kformSubmit').click(UpSell);
-            $('#kform_payPalButton').click(UpSell);
-        })
-
-        function UpSell() {
-            if (window.fbq) {
-                window.fbq('track', 'Purchase', {
-                    value: <?php echo $upsell->price ?>,
-                    currency: '<?= $data->FaceBookCurrency; ?>'
-                });
-            }
-        }
 
     </script>
     <?php

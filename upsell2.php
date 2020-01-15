@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__) . '/locale/languages.php');
+
 //This code must be included at the top of your script before any output is sent to the browser
 //-even before <!DOCTYPE> declaration
 require_once realpath(dirname(__FILE__)."/resources/konnektiveSDK.php");
@@ -10,13 +10,14 @@ $productId = $ksdk->page->productId;
 $upsell = $ksdk->getProduct((int) $productId);
 
 include 'includes/data.php';
+$orderItem=GetOrderItem($ksdk,$data->upsell1ID);
+
 ?>
-<?php include 'includes/data.php' ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>
-        <?= T('FEG Serum - Eyelash Enchancer - Exclusive offer'); ?>
+        <?= T('FEG Serum - Eyelash Enhancer - Exclusive offer'); ?>
     </title>
 
     <meta name="viewport" content="width=device-width"/>
@@ -59,7 +60,7 @@ include 'includes/data.php';
                 <div><?= T('WOW'); ?></div>
                 <div><img class="img-hor" src="resources/images/present.jpg" /></div>
             </div>
-            <div>You have <em><?= T('WON'); ?></em> a <em><?= T('FREE'); ?></em><br>
+            <div><em><?= T('You have WON'); ?></em>  <em><?= T('a Free'); ?></em><br>
            <?= T('FEG SERUM!'); ?></div>
         </div>
     </div>
@@ -90,7 +91,7 @@ include 'includes/data.php';
                         <?php $ksdk->echoUpsaleCheckoutButton('Claim Now'); ?>
 
                     </form>
-                    <div class="below-upsell-button"><?= T('ONLY PAY'); ?> <?php echo $data->currency . $upsell->price ?> <?= T('SHIPPING & HANDLING'); ?></div>
+                    <div class="below-upsell-button"><?= T('ONLY PAY'); ?> <?php echo $data->currency . $upsell->price ?> <?= T('Shipping'); ?></div>
                 </div>
             </div>
             <div class="row no-thanks">
@@ -103,23 +104,22 @@ include 'includes/data.php';
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            $('#kformSubmit').click(UpSell);
-            $('#kform_payPalButton').click(UpSell);
-        })
-        function UpSell(){
-            if(window.fbq) {
-                window.fbq('track', 'Purchase', {value: <?php echo $upsell->price ?>, currency: <?= $data->FaceBookCurrency; ?>});
-            }
-        }
 
     </script>
     <?php
 
-    $PixelPage="/upsell.html";
+    if($orderItem){
 
+    $pageEvent = "Purchase";
+    $Value = array("value" => $orderItem->price, 'currency' => $data->FaceBookCurrency);
+    $qs = ["Event"=>$pageEvent,"Value"=>$Value];
     include_once('pixelcode/pixelhelper.php');
 
+}else {
+        $PixelPage = "/upsell.html";
+
+        include_once('pixelcode/pixelhelper.php');
+    }
 
     ?>
 </body>

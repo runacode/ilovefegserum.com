@@ -3,6 +3,9 @@
   "country_2": "United States",
   "currency": "$",
   "FaceBookCurrency": "USD",
+  "upsell1ID": 42,
+  "upsell2ID": 41,
+  "upsell3ID": 43,
   "products": [
     {
       "cid": 39,

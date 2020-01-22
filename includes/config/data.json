@@ -1,8 +1,8 @@
 {
-"country_1": "US",
-  "country_2": "United States",
-  "currency": "$",
-  "FaceBookCurrency": "USD",
+"country_1": "CA",
+  "country_2": "Canada",
+  "currency": "C$",
+  "FaceBookCurrency": "CAD",
   "upsell1ID": 42,
   "upsell2ID": 41,
   "upsell3ID": 43,

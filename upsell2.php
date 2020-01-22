@@ -2,15 +2,15 @@
 
 //This code must be included at the top of your script before any output is sent to the browser
 //-even before <!DOCTYPE> declaration
-require_once realpath(dirname(__FILE__)."/resources/konnektiveSDK.php");
+require_once realpath(dirname(__FILE__) . "/resources/konnektiveSDK.php");
 $pageType = "upsellPage2"; //choose from: presalePage, leadPage, checkoutPage, upsellPage1, upsellPage2, upsellPage3, upsellPage4, thankyouPage
 $deviceType = "ALL"; //choose from: DESKTOP, MOBILE, ALL
-$ksdk = new KonnektiveSDK($pageType,$deviceType);
+$ksdk = new KonnektiveSDK($pageType, $deviceType);
 $productId = $ksdk->page->productId;
-$upsell = $ksdk->getProduct((int) $productId);
+$upsell = $ksdk->getProduct((int)$productId);
 
 include 'includes/data.php';
-$orderItem=GetOrderItem($ksdk,$data->upsell1ID);
+$orderItem = GetOrderItem($ksdk, $data->upsell1ID);
 
 ?>
 <!DOCTYPE html>
@@ -56,12 +56,12 @@ $orderItem=GetOrderItem($ksdk,$data->upsell1ID);
         </div>
         <div class="upsell-present">
             <div class="d-flex">
-                <div><img src="resources/images/present.jpg" /></div>
+                <div><img src="resources/images/present.jpg"/></div>
                 <div><?= T('WOW'); ?></div>
-                <div><img class="img-hor" src="resources/images/present.jpg" /></div>
+                <div><img class="img-hor" src="resources/images/present.jpg"/></div>
             </div>
-            <div><em><?= T('You have WON'); ?></em>  <em><?= T('a Free'); ?></em><br>
-           <?= T('FEG SERUM!'); ?></div>
+            <div><em><?= T('You have WON'); ?></em> <em><?= T('a Free'); ?></em><br>
+                <?= T('FEG SERUM!'); ?></div>
         </div>
     </div>
 </header>
@@ -91,7 +91,7 @@ $orderItem=GetOrderItem($ksdk,$data->upsell1ID);
                         <?php $ksdk->echoUpsaleCheckoutButton('Claim Now'); ?>
 
                     </form>
-                    <div class="below-upsell-button"><?= T('ONLY PAY'); ?> <?php echo $data->currency . $upsell->price ?> <?= T('Shipping'); ?></div>
+                    <div class="below-upsell-button"><?= T('ONLY PAY'); ?><?php echo $data->currency . $upsell->price ?> <?= T('Shipping'); ?></div>
                 </div>
             </div>
             <div class="row no-thanks">
@@ -103,19 +103,34 @@ $orderItem=GetOrderItem($ksdk,$data->upsell1ID);
 
         </div>
     </div>
-    <script>
+    <?php if(isset($data->Lo_Site_Id)) {
+        ?>
+        }
+        <script type='text/javascript'>
+            window.__lo_site_id = <?php echo $data->Lo_Site_Id; ?>;
 
-    </script>
+                (function () {
+                    var wa = document.createElement('script');
+                    wa.type = 'text/javascript';
+                    wa.async = true;
+                    wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(wa, s);
+                })();
+        </script>
+        <?php
+    }
+    ?>
     <?php
 
-    if($orderItem){
+    if ($orderItem) {
 
-    $pageEvent = "Purchase";
-    $Value = array("value" => $orderItem->price, 'currency' => $data->FaceBookCurrency);
-    $qs = ["Event"=>$pageEvent,"Value"=>$Value];
-    include_once('pixelcode/pixelhelper.php');
+        $pageEvent = "Purchase";
+        $Value = array("value" => $orderItem->price, 'currency' => $data->FaceBookCurrency);
+        $qs = ["Event" => $pageEvent, "Value" => $Value];
+        include_once('pixelcode/pixelhelper.php');
 
-}else {
+    } else {
         $PixelPage = "/upsell.html";
 
         include_once('pixelcode/pixelhelper.php');

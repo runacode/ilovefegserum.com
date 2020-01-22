@@ -4,8 +4,8 @@ KformConfig::setConfig(array(
     "isWordpress" => false,
     "apiLoginId" => "os_api",
     "apiPassword" => 'p@$$w0rd123123',
-   "authString"=>"1aedbe2a4674d83f94b8fa4d425f9da4",
-	"autoUpdate_allowedIps"=>array("80.248.30.132"),
+ "authString"=>"1aedbe2a4674d83f94b8fa4d425f9da4",
+	"autoUpdate_allowedIps"=>array("80.248.30.133"),
 	"campaignId"=>11,
 	"resourceDir"=>"resources/"));
 
@@ -181,74 +181,26 @@ if($_SERVER['REQUEST_METHOD']=='POST' && strstr($requestUri,$baseFile))
 
 KFormConfig::$campaignData = '{
     "countries": {
-        "US": "United States"
+        "CA": "Canada"
     },
     "states": {
-        "US": {
-            "AL": "Alabama",
-            "AK": "Alaska",
-            "AZ": "Arizona",
-            "AR": "Arkansas",
-            "CA": "California",
-            "CO": "Colorado",
-            "CT": "Connecticut",
-            "DE": "Delaware",
-            "DC": "District of Columbia",
-            "FL": "Florida",
-            "GA": "Georgia",
-            "HI": "Hawaii",
-            "ID": "Idaho",
-            "IL": "Illinois",
-            "IN": "Indiana",
-            "IA": "Iowa",
-            "KS": "Kansas",
-            "KY": "Kentucky",
-            "LA": "Louisiana",
-            "ME": "Maine",
-            "MD": "Maryland",
-            "MA": "Massachusetts",
-            "MI": "Michigan",
-            "MN": "Minnesota",
-            "MS": "Mississippi",
-            "MO": "Missouri",
-            "MT": "Montana",
-            "NE": "Nebraska",
-            "NV": "Nevada",
-            "NH": "New Hampshire",
-            "NJ": "New Jersey",
-            "NM": "New Mexico",
-            "NY": "New York",
-            "NC": "North Carolina",
-            "ND": "North Dakota",
-            "OH": "Ohio",
-            "OK": "Oklahoma",
-            "OR": "Oregon",
-            "PA": "Pennsylvania",
-            "RI": "Rhode Island",
-            "SC": "South Carolina",
-            "SD": "South Dakota",
-            "TN": "Tennessee",
-            "TX": "Texas",
-            "UT": "Utah",
-            "VT": "Vermont",
-            "VA": "Virginia",
-            "WA": "Washington",
-            "WV": "West Virginia",
-            "WI": "Wisconsin",
-            "WY": "Wyoming",
-            "AS": "American Samoa",
-            "FM": "Federated States of Micronesia",
-            "GU": "Guam",
-            "MP": "Northern Mariana Islands",
-            "PR": "Puerto Rico",
-            "MH": "Republic of Marshall Islands",
-            "VI": "Virgin Islands of the U.S.",
-            "AE": "Armed Forces Middle East",
-            "AA": "Armed Forces Americas",
-            "AP": "Armed Forces Pacific"
+        "CA": {
+            "AB": "Alberta",
+            "BC": "British Columbia",
+            "MB": "Manitoba",
+            "NB": "New Brunswick",
+            "NL": "Newfoundland and Labrador",
+            "NT": "Northwest Territories",
+            "NS": "Nova Scotia",
+            "NU": "Nunavut",
+            "ON": "Ontario",
+            "PE": "Prince Edward Island",
+            "QC": "Quebec",
+            "SK": "Saskatchewan",
+            "YT": "Yukon"
         }
     },
-    "currencySymbol": "$",
+    "currencySymbol": "CA$",
     "shipOptions": [],
     "coupons": [],
     "products": [],
@@ -315,7 +267,7 @@ KFormConfig::$campaignData = '{
             "description": "*No description available",
             "imagePath": "https:\/\/www.ilovefegserum.com\/resources\/images\/smain-small.jpg",
             "imageId": 1,
-            "price": "11.97",
+            "price": "17.97",
             "shipPrice": "0.00",
             "category": "FEG"
         },
@@ -337,7 +289,7 @@ KFormConfig::$campaignData = '{
             "description": "*No description available",
             "imagePath": "https:\/\/www.ilovefegserum.com\/resources\/images\/upsell1.jpg",
             "imageId": 1,
-            "price": "4.95",
+            "price": "6.95",
             "shipPrice": "0.00",
             "category": "FEG"
         },
@@ -347,7 +299,7 @@ KFormConfig::$campaignData = '{
             "description": "*No description available",
             "imagePath": "https:\/\/www.ilovefegserum.com\/resources\/images\/upsell2.jpg",
             "imageId": 2,
-            "price": "9.95",
+            "price": "12.95",
             "shipPrice": "0.00",
             "category": "FEG"
         },
@@ -357,14 +309,14 @@ KFormConfig::$campaignData = '{
             "description": "*No description available",
             "imagePath": "https:\/\/www.ilovefegserum.com\/resources\/images\/upsell3.jpg",
             "imageId": 3,
-            "price": "4.95",
+            "price": "6.95",
             "shipPrice": "0.00",
             "category": "FEG"
         }
     },
     "shipProfiles": [],
     "continents": {
-        "US": "NA"
+        "CA": "NA"
     },
     "paypal": {
         "paypalBillerId": 6

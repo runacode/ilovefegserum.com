@@ -12,7 +12,6 @@ $ksdk = new KonnektiveSDK($pageType, $deviceType);
 $offers = $ksdk->getOffers();
 
 include 'includes/data.php';
-include_once(dirname(__FILE__) . '/locale/languages.php');
 
 ?><!DOCTYPE html>
 <html>
@@ -38,10 +37,10 @@ include_once(dirname(__FILE__) . '/locale/languages.php');
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <script>
-        window.product = JSON.parse('<?php echo json_encode($product); ?>');
-        window.data = JSON.parse('<?php echo json_encode($data); ?>');
+        window.product = <?php echo json_encode($product); ?>;
+        window.data = <?php echo json_encode($data); ?>;
     </script>
-    <script src="/resources/js/cart.min.js"></script>
+    <script src="/resources/js/cart.min.js?rand=<?php echo rand(0,1000); ?>"></script>
 
     <link rel="stylesheet" type="text/css" href="resources/css/fonts/fonts.css">
     <link rel="stylesheet" type="text/css" href="resources/css/shopify.css">
@@ -50,7 +49,6 @@ include_once(dirname(__FILE__) . '/locale/languages.php');
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
 
 
 <header class="container-fluid p-0">
@@ -185,11 +183,67 @@ include_once(dirname(__FILE__) . '/locale/languages.php');
 
 <?php include_once('pixelcode/pixelhelper.php'); ?>
 
+<?php if(isset($data->Lo_Site_Id)) {
+    ?>
+    }
+    <script type='text/javascript'>
+        window.__lo_site_id = <?php echo $data->Lo_Site_Id; ?>;
 
-<script>
-
-</script>
+            (function () {
+                var wa = document.createElement('script');
+                wa.type = 'text/javascript';
+                wa.async = true;
+                wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wa, s);
+            })();
+    </script>
+    <?php
+}
+?>
 <script src="resources/js/main.min.js?1=2"></script>
+
+<script lang="template/html" type="template/html" id="WasTemplate">
+    <div class="col-6 ">
+        <?= T('Was'); ?>
+    </div>
+</script>
+<script lang="template/html" type="template/html" id="TotalTemplate">
+    <div class="col-6 ">
+        <?= T('Total'); ?>
+    </div>
+</script>
+<script lang="template/html" type="template/html" id="SavingTemplate">
+    <div class="col-6 ">
+        <?= T('Saving'); ?>
+    </div>
+</script>
+<script lang="template/html" type="template/html" id="CartBottomTemplate">
+    <div class="container cart-bottom">
+        <div class="row">
+            <div class="col-12 name">
+                <div><a class="checkout-button" target="_top" href="/checkout.php"><?= T('Check Out'); ?> <i
+                                class="fa fa-arrow-circle-right"></i></a></div>
+            </div>
+            <div><img class="img-fluid pl-5 pt-1 pr-5" src="resources/images/sponsors-01.jpg"/></div>
+            <div class="accepted-payment">
+                <h3><?= T('Accepted Payment Methods'); ?></h3>
+                <img src="resources/images/sponsors-02.jpg">
+            </div>
+            <div class="d-flex satisfaction-guaranteed">' +
+                <div><img src="resources/images/satisfaction-guaranteed.jpg"/></div>
+                <div><?= T('Our products are backed by a risk-free'); ?>
+                    <em><?= T('30-day money-back'); ?></em><?= T('guarantee If you are not completely satisfied with your purchase'); ?>
+                    <em><?= T('for ANY REASON'); ?></em>, <?= T('we will do'); ?>
+                    <em><?= T('WHATEVER it takes'); ?></em><?= T('to make it right'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script lang="template/html" type="template/html" id="CartTempty">
+    <div class="mt-3 mb-3"><?= T('Your cart is empty'); ?><br><?= T('Please add some items to proceed shopping'); ?></div>
+</script>
 </body>
 </html>
 

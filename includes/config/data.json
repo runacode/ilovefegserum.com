@@ -3,6 +3,8 @@
   "country_2": "Canada",
   "currency": "C$",
   "FaceBookCurrency": "CAD",
+"Lo_Site_Id": 191001,
+ "lang": "en",
   "upsell1ID": 42,
   "upsell2ID": 41,
   "upsell3ID": 43,
@@ -29,7 +31,7 @@
       "support_email": "support@ilovefegserum.com",
       "rand_head": "Free Shipping - Eye Lash Serum",
       "logos": "../resources/images/logos.jpg",
-      "head": "60% off + Free Shipping USA only"
+      "head": "60% off + Free Shipping Canada only"
       
     }
   ]
